@@ -1,6 +1,6 @@
 // module.exports = 
-function toReadable() {
-    let numbers = {
+function toReadable(number) {
+    var numbers = {
         0: "zero",
         1: "one",
         2: "two",
@@ -22,8 +22,6 @@ function toReadable() {
         18: "eighteen",
         19: "nineteen",
         20: "twenty",
-        21: "twenty-one",
-        22: "twenty-two",
         30: "thirty",
         40: "forty",
         50: "fifty",
@@ -31,9 +29,45 @@ function toReadable() {
         70: "seventy",
         80: "eighty",
         90: "ninety",
-        100: "one hundred",
-        1000: "one thousand"
     }
-    console.log(numbers[0]);
+
+    // let length = String(number).length;
+    //           990
+    //  nulls = 100;
+    for (var nulls = 1, i = 1; i < String(number).length; i ++ ) nulls *= 10;
+
+    let dec = number % nulls // 90
+
+    let ost = dec != 0 ? dec % (nulls/10) : undefined;
+    console.log(nulls + ' ' + dec + ' ' + ost);
+    return numbers[(number - dec)/nulls] += 0 < dec < 20  || ost == 0 ? numbers[dec] : numbers[dec - ost] + ' ' + numbers[ost];
+    //  let dec = number 
+    
+
+
+
+
+    // 999 (900 + 99 + 9) ---- 990 (900 + 90) ---- 919 (900 + 19) ---- 900 ----- 99 (90 + 9) ------ 90 ------ <20 
+  
+    return dec;
+
+
+
+
+
+    // if (number < 20) {
+    //     return numbers[number];
+    // } else if (String(number).length == 2) {
+    //     let ost = number % 10;
+    //     let dec = number - ost;
+    //     return ost == 0 ? numbers[dec] : numbers[dec] + ' ' + numbers[ost];
+    // } else if (String(number).length == 3) {
+    //     let ost = (number % 100) % 10;
+    //     let dec = (number % 100);
+    //     console.log(dec + ' ' + ost);
+    //     let sot = Number(String(number)[0]);
+    //     return numbers[sot] += dec == 0 ? ' hundred ' : (dec - ost) < 20 ?  ' hundred ' + numbers[dec] : ' hundred ' + (ost == 0 ? numbers[dec] : numbers[dec - ost] + ' ' + numbers[ost]);
+    // }
 };
-toReadable();
+
+console.log(toReadable(100));
