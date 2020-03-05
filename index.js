@@ -45,7 +45,7 @@ function toReadable(number) {
     
 
 
-
+https://docs.google.com/forms/u/0/d/e/1FAIpQLScHaTjoazbz8mworB6A-mP1tZf_adJLreQ_VwfYQYgOANOC-A/formResponse
 
     // 999 (900 + 99 + 9) ---- 990 (900 + 90) ---- 919 (900 + 19) ---- 900 ----- 99 (90 + 9) ------ 90 ------ <20 
   
