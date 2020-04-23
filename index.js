@@ -1,73 +1,49 @@
-// module.exports = 
-function toReadable(number) {
-    var numbers = {
-        0: "zero",
-        1: "one",
-        2: "two",
-        3: "three",
-        4: "four",
-        5: "five",
-        6: "six",
-        7: "seven",
-        8: "eight",
-        9: "nine",
-        10: "ten",
-        11: "eleven",
-        12: "twelve",
-        13: "thirteen",
-        14: "fourteen",
-        15: "fifteen",
-        16: "sixteen",
-        17: "seventeen",
-        18: "eighteen",
-        19: "nineteen",
-        20: "twenty",
-        30: "thirty",
-        40: "forty",
-        50: "fifty",
-        60: "sixty",
-        70: "seventy",
-        80: "eighty",
-        90: "ninety",
-    }
+var Alphabet = {
+    BINARY:        '01',
+    OCTAL:         '01234567',
+    DECIMAL:       '0123456789',
+    HEXA_DECIMAL:  '0123456789abcdef',
+    ALPHA_LOWER:   'abcdefghijklmnopqrstuvwxyz',
+    ALPHA_UPPER:   'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    ALPHA:         'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    ALPHA_NUMERIC: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  };
+function convert(input, source, target) {
+    let inputSys = source.length
+    let outputSys = target.length
+    console.log(input, inputSys, outputSys);
+    // 25 = 1*10 + 1*10 + 5
+    // 1111 = 1*2~3 + 1*2~2 + 1*2~1 + 1*2~0 
+    let resDec = 0
+    // let input = 1111
+    let len = input.length - 1
+    for (let i = len, j = 0; i >= 0; i--, j++) {
+        resDec += input[len] * Math.pow(inputSys, j)
+        console.log(resDec);
+    } 
 
-    // let length = String(number).length;
-    //           990
-    //  nulls = 100;
-    for (var nulls = 1, i = 1; i < String(number).length; i ++ ) nulls *= 10;
-
-    let dec = number % nulls // 90
-
-    let ost = dec != 0 ? dec % (nulls/10) : undefined;
-    console.log(nulls + ' ' + dec + ' ' + ost);
-    return numbers[(number - dec)/nulls] += 0 < dec < 20  || ost == 0 ? numbers[dec] : numbers[dec - ost] + ' ' + numbers[ost];
-    //  let dec = number 
     
 
+    
+    const rec = (resDec) => {
+        result += target[resDec % outputSys]
+        console.log(resDec);
+        resDecNew = Math.floor(resDec/outputSys)
+        if (resDecNew > outputSys) {
+            rec(resDecNew)
+        }
+        return result += target[resDecNew]
+    }
 
-https://docs.google.com/forms/u/0/d/e/1FAIpQLScHaTjoazbz8mworB6A-mP1tZf_adJLreQ_VwfYQYgOANOC-A/formResponse
-
-    // 999 (900 + 99 + 9) ---- 990 (900 + 90) ---- 919 (900 + 19) ---- 900 ----- 99 (90 + 9) ------ 90 ------ <20 
-  
-    return dec;
+    let result = ''
+    return rec(resDec)
 
 
 
+    // return resDec
+  }
 
-
-    // if (number < 20) {
-    //     return numbers[number];
-    // } else if (String(number).length == 2) {
-    //     let ost = number % 10;
-    //     let dec = number - ost;
-    //     return ost == 0 ? numbers[dec] : numbers[dec] + ' ' + numbers[ost];
-    // } else if (String(number).length == 3) {
-    //     let ost = (number % 100) % 10;
-    //     let dec = (number % 100);
-    //     console.log(dec + ' ' + ost);
-    //     let sot = Number(String(number)[0]);
-    //     return numbers[sot] += dec == 0 ? ' hundred ' : (dec - ost) < 20 ?  ' hundred ' + numbers[dec] : ' hundred ' + (ost == 0 ? numbers[dec] : numbers[dec - ost] + ' ' + numbers[ost]);
-    // }
-};
-
-console.log(toReadable(100));
+console.log(convert("1010", Alphabet.BINARY, Alphabet.HEXA_DECIMAL)); // should return "15"
+// console.log(convert("17", Alphabet.OCTAL, Alphabet.DECIMAL)); // should return 15"
+// convert("1010", Alphabet.BINARY, Alphabet.DECIMAL); // should return "10"
+// console.log(convert("27", Alphabet.DECIMAL, Alphabet.ALPHA_LOWER));
