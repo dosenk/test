@@ -18,9 +18,10 @@ function convert(input, source, target) {
     // let input = 1111
     let len = input.length - 1
     for (let i = len, j = 0; i >= 0; i--, j++) {
-        resDec += input[len] * Math.pow(inputSys, j)
-        console.log(resDec);
+        resDec += input[i] * Math.pow(inputSys, j)
     } 
+
+    console.log(resDec);
 
     
 
@@ -36,14 +37,14 @@ function convert(input, source, target) {
     }
 
     let result = ''
-    return rec(resDec)
+    return rec(resDec).split('').reverse().join('')
 
 
 
     // return resDec
   }
 
-console.log(convert("1010", Alphabet.BINARY, Alphabet.HEXA_DECIMAL)); // should return "15"
+console.log(convert("11100111", Alphabet.BINARY, Alphabet.DECIMAL)); // should return "15"
 // console.log(convert("17", Alphabet.OCTAL, Alphabet.DECIMAL)); // should return 15"
 // convert("1010", Alphabet.BINARY, Alphabet.DECIMAL); // should return "10"
 // console.log(convert("27", Alphabet.DECIMAL, Alphabet.ALPHA_LOWER));
